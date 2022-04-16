@@ -1,5 +1,7 @@
 package ar.edu.unlp.info.bd2.model;
 
-public class VaccinationSchedule {
+import java.util.ArrayList;
 
+public class VaccinationSchedule {
+ ArrayList<Vaccine> vaccines;
 }
