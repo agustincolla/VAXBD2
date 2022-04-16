@@ -1,5 +1,5 @@
 package ar.edu.unlp.info.bd2.model;
 
 public class Nurse extends Person {
-
+	Integer experience;
 }
