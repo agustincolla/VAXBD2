@@ -18,7 +18,7 @@ public class Nurse extends Person {
 	public void setExperience(Integer experience) {
 		this.experience = experience;
 	}
-	//crea un/a enfermero/a con los parametros recibidos y prueba 
+	//crea un/a enfermero/a con los parametros recibidos 
 	/**
 	 * @param dni el dni
 	 * @param fullName nombre del/la enfermero/a
