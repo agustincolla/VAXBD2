@@ -1,7 +1,5 @@
 package ar.edu.unlp.info.bd2.model;
 
-import ar.edu.unlp.info.bd2.repositories.VaxException;
-
 public class SupportStaff extends Person {
 	String area;
     //retornar area donde trabaja el personal de soporte

@@ -1,7 +1,5 @@
 package ar.edu.unlp.info.bd2.model;
 
-import ar.edu.unlp.info.bd2.repositories.VaxException;
-
 public class Nurse extends Person {
 	Integer experience;
     //retornar años de experiencia del/la enfermero/a
