@@ -25,7 +25,7 @@ public class Nurse extends Person {
 	 */
 	public Nurse(String dni, String fullName, Integer experience) {
 		this.setDni(dni);
-		this.setFullNam(fullName);
+		this.setFullName(fullName);
 		this.setExperience(experience);
 	}
 	

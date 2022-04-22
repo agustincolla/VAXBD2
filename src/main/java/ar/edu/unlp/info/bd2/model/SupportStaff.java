@@ -24,7 +24,7 @@ public class SupportStaff extends Person {
 	* */
 	public SupportStaff(String dni, String fullName, String area) {
 		this.setDni(dni);
-		this.setFullNam(fullName);
+		this.setFullName(fullName);
 		this.setArea(area);
 	}
 	

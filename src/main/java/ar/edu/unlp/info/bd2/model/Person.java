@@ -2,7 +2,7 @@ package ar.edu.unlp.info.bd2.model;
 
 public class Person {
 	String dni; 
-	String fullNam;
+	String fullName;
 	//retornar dni de la persona
 	/**
 	 * @return el dni
@@ -21,14 +21,14 @@ public class Person {
 	 * @return el nombre de la persona
 	 */
 	//retornar nombre de la persona
-	public String getFullNam() {
-		return fullNam;
+	public String getFullName() {
+		return fullName;
 	}
 	/**
-	 * @param fullNam el nombre
+	 * @param fullName el nombre
 	 */
 	//modificar nombre de la persona
-	public void setFullNam(String fullNam) {
-		this.fullNam = fullNam;
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
 	} 
 }
