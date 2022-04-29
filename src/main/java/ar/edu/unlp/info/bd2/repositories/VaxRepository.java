@@ -1,17 +1,18 @@
 package ar.edu.unlp.info.bd2.repositories;
 
+import java.io.Serializable;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class VaxRepository {
-  public SessionFactory sessionFactory= new Configuration().configure().buildSessionFactory() ;
-  public Session session= sessionFactory.openSession();
-  public void save(Object guardar) {
-	  session.beginTransaction();
-	  session.save(guardar);
-	  session.getTransaction().commit();
-	  session.close();
+  @Autowired
+  private SessionFactory sessionFactory;
+  
+  public Serializable save(Object guardar) throws VaxException{
+	  Session session= sessionFactory.getCurrentSession();
+	  return session.save(guardar);
   }
   
 }
