@@ -25,8 +25,12 @@ public class SupportStaff extends Person {
 	public void setArea(String area) {
 		this.area = area;
 	}
-	public void addCentre(Centre c) {
-		this.getCentres().add(c);
+	public boolean addCentre(Centre c) {
+		boolean ok=true;
+		if(!centres.contains(c)) {
+			this.getCentres().add(c);
+		}
+		return ok;
 	}
 	
 	/**
