@@ -3,6 +3,13 @@ package ar.edu.unlp.info.bd2.model;
 public class Person {
 	String dni; 
 	String fullName;
+	Long id;
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 	//retornar dni de la persona
 	/**
 	 * @return el dni
