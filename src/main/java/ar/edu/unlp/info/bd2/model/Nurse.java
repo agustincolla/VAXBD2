@@ -30,6 +30,9 @@ public class Nurse extends Person {
 		if(!centres.contains(c)) {
 			this.getCentres().add(c);
 		}
+		else {
+			ok=false;
+		}
 		return ok;
 	}
 	//crea un/a enfermero/a con los parametros recibidos 

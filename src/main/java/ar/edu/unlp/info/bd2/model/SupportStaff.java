@@ -30,6 +30,9 @@ public class SupportStaff extends Person {
 		if(!centres.contains(c)) {
 			this.getCentres().add(c);
 		}
+		else {
+			ok=false;
+		}
 		return ok;
 	}
 	
