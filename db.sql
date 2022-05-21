@@ -1,0 +1,3 @@
+CREATE USER IF NOT EXISTS 'grupo26' IDENTIFIED BY 'pa$$word26';
+
+
