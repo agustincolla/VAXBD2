@@ -9,7 +9,14 @@ public class Shot {
 	Date date;
 	Centre centre; 
 	Nurse nurse;
+	ShotCertificate shotCertificate;
 	
+	public ShotCertificate getShotCertificate() {
+		return shotCertificate;
+	}
+	public void setShotCertificate(ShotCertificate shotCertificate) {
+		this.shotCertificate = shotCertificate;
+	}
 	public Long getId() {
 		return id;
 	}

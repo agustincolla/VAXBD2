@@ -1,5 +1,6 @@
 package ar.edu.unlp.info.bd2.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Patient {
@@ -8,7 +9,14 @@ public class Patient {
 	String fullname;
 	String password; 
 	Date dayOfBirth;
+	ArrayList<Shot> shots=new ArrayList<Shot>(); 
 	
+	public ArrayList<Shot> getShots() {
+		return shots;
+	}
+	public void setShots(ArrayList<Shot> shots) {
+		this.shots = shots;
+	}
 	public String getEmail() {
 		return email;
 	}
