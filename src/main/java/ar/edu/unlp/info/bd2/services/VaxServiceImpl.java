@@ -21,8 +21,9 @@ public class VaxServiceImpl implements VaxService {
     }
 	//@Transactional
 	public Patient createPatient(String email, String fullname, String password, Date dayOfBirth) throws VaxException {
-		// TODO Auto-generated method stub
-		return null;
+		Patient patient = new Patient(email, fullname, password, dayOfBirth);
+        repository.save(patient);
+		return patient;
 	}
 
 	@Override
