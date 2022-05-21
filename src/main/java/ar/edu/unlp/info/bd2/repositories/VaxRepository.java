@@ -7,12 +7,13 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class VaxRepository {
-  @Autowired
-  private SessionFactory sessionFactory;
-  
-  public Serializable save(Object guardar) throws VaxException{
-	  Session session= sessionFactory.getCurrentSession();
-	  return session.save(guardar);
-  }
-  
+
+    @Autowired
+    private SessionFactory sessionFactory;
+
+    public Serializable save(Object guardar) throws VaxException {
+        Session session = sessionFactory.getCurrentSession();
+        return session.save(guardar);
+    }
+
 }
