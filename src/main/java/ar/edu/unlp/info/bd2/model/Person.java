@@ -1,9 +1,18 @@
 package ar.edu.unlp.info.bd2.model;
 
+import java.util.ArrayList;
+
 public class Person {
 	String dni; 
 	String fullName;
 	Long id;
+	ArrayList<Centre> centres= new ArrayList<Centre>();
+	public ArrayList<Centre> getCentres() {
+		return centres;
+	}
+	public void setCentres(ArrayList<Centre> centres) {
+		this.centres = centres;
+	}
 	public Long getId() {
 		return id;
 	}
@@ -38,4 +47,14 @@ public class Person {
 	public void setFullName(String fullName) {
 		this.fullName = fullName;
 	} 
+	public boolean addCentre(Centre c) {
+		boolean ok=true;
+		if(!centres.contains(c)) {
+			this.getCentres().add(c);
+		}
+		else {
+			ok=false;
+		}
+		return ok;
+	}
 }

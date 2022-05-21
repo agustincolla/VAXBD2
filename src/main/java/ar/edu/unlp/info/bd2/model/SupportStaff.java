@@ -1,16 +1,7 @@
 package ar.edu.unlp.info.bd2.model;
 
-import java.util.ArrayList;
-
 public class SupportStaff extends Person {
 	String area;
-	ArrayList<Centre> centres= new ArrayList<Centre>();
-    public ArrayList<Centre> getCentres() {
-		return centres;
-	}
-	public void setCentres(ArrayList<Centre> centres) {
-		this.centres = centres;
-	}
 	//retornar area donde trabaja el personal de soporte
 	/**
 	 * @return area donde trabaja
@@ -24,16 +15,6 @@ public class SupportStaff extends Person {
 	 */
 	public void setArea(String area) {
 		this.area = area;
-	}
-	public boolean addCentre(Centre c) {
-		boolean ok=true;
-		if(!centres.contains(c)) {
-			this.getCentres().add(c);
-		}
-		else {
-			ok=false;
-		}
-		return ok;
 	}
 	
 	/**
