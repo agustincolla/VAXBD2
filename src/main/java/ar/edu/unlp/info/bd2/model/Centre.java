@@ -3,6 +3,9 @@ package ar.edu.unlp.info.bd2.model;
 import java.util.ArrayList;
 
 public class Centre {
+
+    public Centre() {
+    }
 	Long id;
 	String name;
 	ArrayList<Person> staff = new ArrayList<Person> (); 

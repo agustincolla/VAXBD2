@@ -1,6 +1,9 @@
 package ar.edu.unlp.info.bd2.model;
 
 public class SupportStaff extends Person {
+
+    public SupportStaff() {
+    }
 	String area;
 	//retornar area donde trabaja el personal de soporte
 	/**

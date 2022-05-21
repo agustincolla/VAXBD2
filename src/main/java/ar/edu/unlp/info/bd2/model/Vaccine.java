@@ -1,6 +1,9 @@
 package ar.edu.unlp.info.bd2.model;
 
 public class Vaccine {
+
+    public Vaccine() {
+    }
 	String name;
 	Long id;
 	//retorna el nombre de la vacuna

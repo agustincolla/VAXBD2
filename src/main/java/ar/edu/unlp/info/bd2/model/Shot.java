@@ -3,6 +3,9 @@ package ar.edu.unlp.info.bd2.model;
 import java.util.Date;
 
 public class Shot {
+
+    public Shot() {
+    }
 	Long id;
 	Patient patient; 
 	Vaccine vaccine; 

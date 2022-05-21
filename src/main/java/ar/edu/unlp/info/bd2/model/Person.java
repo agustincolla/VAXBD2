@@ -3,6 +3,9 @@ package ar.edu.unlp.info.bd2.model;
 import java.util.ArrayList;
 
 public class Person {
+
+    public Person() {
+    }
 	String dni; 
 	String fullName;
 	Long id;

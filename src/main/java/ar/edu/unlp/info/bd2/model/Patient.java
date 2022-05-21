@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Patient {
+
+    public Patient() {
+    }
 	Long id;
 	String email; 
 	String fullname;

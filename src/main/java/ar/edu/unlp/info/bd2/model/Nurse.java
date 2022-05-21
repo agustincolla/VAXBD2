@@ -1,6 +1,9 @@
 package ar.edu.unlp.info.bd2.model;
 
 public class Nurse extends Person {
+
+    public Nurse() {
+    }
 	Integer experience;
 	//retornar años de experiencia del/la enfermero/a
 	/**
