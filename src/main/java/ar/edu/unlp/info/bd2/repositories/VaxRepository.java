@@ -111,9 +111,10 @@ public class VaxRepository {
     public Centre getTopShotCentre() {
         Session session = sessionFactory.getCurrentSession();
         return session.createQuery(
-                "select c"
-                + " from Centre c"
-                + " order by (select count(s) from Shot s where s.centre = c)", Centre.class)
+                "select s.centre"
+                + " from Shot s"
+                + " group by s.centre"
+                + " order by count(s) desc", Centre.class)
             .stream()
             .findFirst()
             .get();
