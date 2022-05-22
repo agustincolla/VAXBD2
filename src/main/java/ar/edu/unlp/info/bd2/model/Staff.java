@@ -14,7 +14,7 @@ import javax.persistence.Transient;
 import org.hibernate.annotations.NaturalId;
 
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Staff implements Serializable {
 
 	public Staff() {

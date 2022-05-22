@@ -7,6 +7,8 @@ import ar.edu.unlp.info.bd2.model.*;
 import ar.edu.unlp.info.bd2.repositories.VaxException;
 import ar.edu.unlp.info.bd2.repositories.VaxRepository;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class VaxServiceImpl implements VaxService {
     private VaxRepository repository;
@@ -113,42 +115,43 @@ public class VaxServiceImpl implements VaxService {
 
     @Override
     public List<Nurse> getNurseWithMoreThanNYearsExperience(int years) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return repository.getNurseWithMoreThanNYearsExperience(years);
     }
 
     @Override
     public List<Centre> getCentresTopNStaff(int n) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return repository.getCentresTopNStaff(n);
     }
 
     @Override
     public Centre getTopShotCentre() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return repository.getTopShotCentre();
     }
 
     @Override
     public List<Nurse> getNurseNotShot() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return repository.getNurseNotShot();
     }
 
     @Override
     public String getLessEmployeesSupportStaffArea() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return repository.getLessEmployeesSupportStaffArea();
     }
 
     @Override
     public List<Staff> getStaffWithName(String name) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return repository.getStaffWithName(name);
     }
 
     @Override
     public List<Vaccine> getUnappliedVaccines() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return repository.getUnappliedVaccines();
     }
 
     @Override
     public List<ShotCertificate> getShotCertificatesBetweenDates(Date startDate, Date endDate) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Stream<Shot> shots = repository.getShotsBetweenDates(startDate, endDate);
+        return shots.map(s -> s.getShotCertificate()).collect(Collectors.toList());
     }
 
     @Override
