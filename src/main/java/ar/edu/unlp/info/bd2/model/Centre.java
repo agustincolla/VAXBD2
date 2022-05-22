@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Transient;
 import javax.persistence.ManyToMany;
 import javax.persistence.CascadeType;
+import org.hibernate.annotations.NaturalId;
 
 @Entity
 public class Centre implements Serializable {
@@ -21,6 +22,7 @@ public class Centre implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
 	Long id;
     
+    @NaturalId
 	String name;
     
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})

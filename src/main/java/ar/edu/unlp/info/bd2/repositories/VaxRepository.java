@@ -2,6 +2,7 @@ package ar.edu.unlp.info.bd2.repositories;
 
 import ar.edu.unlp.info.bd2.model.*;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Optional;
 
 import org.hibernate.Session;
@@ -47,68 +48,39 @@ public class VaxRepository {
         return centre;
     }
     
+    public VaccinationSchedule updateVaccinationSchedule(VaccinationSchedule vaccinationSchedule) {
+        Session session = sessionFactory.getCurrentSession();
+        session.update(vaccinationSchedule);
+        return vaccinationSchedule;
+    }
+    
     public Optional<Patient> getPatientByEmail(String email) {
 		Session session = sessionFactory.getCurrentSession();
-        try {
-            Patient patient = session.createQuery(
-                    "select p"
-                    + " from Patient p"
-                    + " where p.email = :email", Patient.class)
-                .setParameter("email", email)
-                .getSingleResult();
-            return Optional.ofNullable(patient);
-        } catch (Exception e) {
-            return Optional.empty();
-        }
+        return session.bySimpleNaturalId(Patient.class).loadOptional(email);
 	}
     
     public Optional<Vaccine> getVaccineByName(String name) {
-        Session session = sessionFactory.getCurrentSession();
-        try {
-            Vaccine vaccine = session.createQuery(
-                    "select v"
-                    + " from Vaccine v"
-                    + " where v.name = :name", Vaccine.class)
-                .setParameter("name", name)
-                .getSingleResult();
-            return Optional.ofNullable(vaccine);
-        } catch (Exception e) {
-            return Optional.empty();
-        }
+		Session session = sessionFactory.getCurrentSession();
+        return session.bySimpleNaturalId(Vaccine.class).loadOptional(name);
     }
     
     public Optional<Centre> getCentreByName(String name) {
         Session session = sessionFactory.getCurrentSession();
-        try {
-            Centre centre = session.createQuery(
-                    "select c"
-                    + " from Centre c"
-                    + " where c.name = :name", Centre.class)
-                .setParameter("name", name)
-                .getSingleResult();
-            return Optional.ofNullable(centre);
-        } catch (Exception e) {
-            return Optional.empty();
-        }
+        return session.bySimpleNaturalId(Centre.class).loadOptional(name);
     }
 
     public Optional<SupportStaff> getSupportStaffByDni(String dni) {
         Session session = sessionFactory.getCurrentSession();
-        try {
-            SupportStaff supportStaff = session.createQuery(
-                    "select sp"
-                    + " from SupportStaff sp"
-                    + " where sp.dni = :dni", SupportStaff.class)
-                .setParameter("dni", dni)
-                .getSingleResult();
-            return Optional.ofNullable(supportStaff);
-        } catch (Exception e) {
-            return Optional.empty();
-        }
+        return session.bySimpleNaturalId(SupportStaff.class).loadOptional(dni);
     }
     
     public VaccinationSchedule getVaccinationScheduleById(Long Id) {
         Session session = sessionFactory.getCurrentSession();
         return session.get(VaccinationSchedule.class, Id);
+    }
+    
+    public List<Patient> getAllPatients() {
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("select p from Patient p", Patient.class).getResultList();
     }
 }

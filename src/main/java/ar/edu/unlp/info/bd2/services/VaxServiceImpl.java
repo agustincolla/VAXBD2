@@ -108,7 +108,7 @@ public class VaxServiceImpl implements VaxService {
 
     @Override
     public List<Patient> getAllPatients() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return repository.getAllPatients();
     }
 
     @Override
@@ -153,7 +153,7 @@ public class VaxServiceImpl implements VaxService {
 
     @Override
     public VaccinationSchedule updateVaccinationSchedule(VaccinationSchedule vaccinationSchedule) throws VaxException {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return repository.updateVaccinationSchedule(vaccinationSchedule);
     }
 
 }
