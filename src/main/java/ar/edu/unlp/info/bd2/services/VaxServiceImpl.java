@@ -3,15 +3,10 @@ package ar.edu.unlp.info.bd2.services;
 import java.util.Date;
 import java.util.Optional;
 
-import ar.edu.unlp.info.bd2.model.Centre;
-import ar.edu.unlp.info.bd2.model.Nurse;
-import ar.edu.unlp.info.bd2.model.Patient;
-import ar.edu.unlp.info.bd2.model.Shot;
-import ar.edu.unlp.info.bd2.model.SupportStaff;
-import ar.edu.unlp.info.bd2.model.VaccinationSchedule;
-import ar.edu.unlp.info.bd2.model.Vaccine;
+import ar.edu.unlp.info.bd2.model.*;
 import ar.edu.unlp.info.bd2.repositories.VaxException;
 import ar.edu.unlp.info.bd2.repositories.VaxRepository;
+import java.util.List;
 
 public class VaxServiceImpl implements VaxService {
     private VaxRepository repository;
@@ -110,5 +105,55 @@ public class VaxServiceImpl implements VaxService {
 	public void setRepository(VaxRepository repository) {
 		this.repository = repository;
 	}
+
+    @Override
+    public List<Patient> getAllPatients() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public List<Nurse> getNurseWithMoreThanNYearsExperience(int years) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public List<Centre> getCentresTopNStaff(int n) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public Centre getTopShotCentre() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public List<Nurse> getNurseNotShot() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public String getLessEmployeesSupportStaffArea() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public List<Staff> getStaffWithName(String name) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public List<Vaccine> getUnappliedVaccines() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public List<ShotCertificate> getShotCertificatesBetweenDates(Date startDate, Date endDate) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public VaccinationSchedule updateVaccinationSchedule(VaccinationSchedule vaccinationSchedule) throws VaxException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
 }

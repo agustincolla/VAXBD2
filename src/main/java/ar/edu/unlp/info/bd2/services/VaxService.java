@@ -112,6 +112,13 @@ public interface VaxService extends VaxStatisticsService{
 	 * @throws VaxException 
 	 */
 	Centre updateCentre(Centre centre);
+    
+    /**
+	 * @param vaccinationSchedule el schedule a actualizar
+	 * @return el vaccinationSchedule
+	 * @throws VaxException 
+	 */
+    VaccinationSchedule updateVaccinationSchedule(VaccinationSchedule vaccinationSchedule) throws VaxException;
 
 	/**
 	 * @param dni el dni del SupportStaff a buscar

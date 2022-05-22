@@ -3,7 +3,7 @@ package ar.edu.unlp.info.bd2.model;
 import javax.persistence.Entity;
 
 @Entity
-public class SupportStaff extends Person {
+public class SupportStaff extends Staff {
 
 	public SupportStaff() {
 	}

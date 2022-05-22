@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.hibernate.Transaction;
 import org.hibernate.exception.ConstraintViolationException;
 import javax.persistence.PersistenceException;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional
 public class VaxRepository {
 
     @Autowired

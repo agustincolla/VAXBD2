@@ -14,9 +14,9 @@ import javax.persistence.Transient;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class Person implements Serializable {
+public class Staff implements Serializable {
 
-	public Person() {
+	public Staff() {
 	}
 
 	String dni;

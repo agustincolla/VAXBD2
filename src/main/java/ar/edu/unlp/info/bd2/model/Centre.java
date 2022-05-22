@@ -24,7 +24,7 @@ public class Centre implements Serializable {
 	String name;
     
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-	List<Person> staff = new ArrayList<>();
+	List<Staff> staff = new ArrayList<>();
 
 	public Long getId() {
 		return id;
@@ -42,15 +42,15 @@ public class Centre implements Serializable {
 		this.name = name;
 	}
 
-	public List<Person> getStaffs() {
+	public List<Staff> getStaffs() {
 		return staff;
 	}
 
-	public void setStaffs(ArrayList<Person> staffs) {
+	public void setStaffs(ArrayList<Staff> staffs) {
 		this.staff = staffs;
 	}
 
-	public void addStaff(Person p) {
+	public void addStaff(Staff p) {
 		staff.add(p);
         p.getCentres().add(this);
 	}
