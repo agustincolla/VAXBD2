@@ -1,26 +1,53 @@
 package ar.edu.unlp.info.bd2.model;
 
+import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Column;
+import javax.persistence.Transient;
+import javax.persistence.ManyToOne;
 
-public class Shot {
+@Entity
+public class Shot implements Serializable {
+
+    public Shot(Patient patient, Vaccine vaccine, Date date, Centre centre, Nurse nurse) {
+        this.patient = patient;
+        this.vaccine = vaccine;
+        this.date = date;
+        this.centre = centre;
+        this.nurse = nurse;
+    }
 
 	public Shot() {
 	}
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
 	Long id;
+    
+    @ManyToOne
 	Patient patient;
+    
+    @ManyToOne
 	Vaccine vaccine;
+    
+    @Column(name = "shot_date")
+    @Temporal(TemporalType.TIMESTAMP)
 	Date date;
+    
+    @ManyToOne
 	Centre centre;
+    
+    @ManyToOne
 	Nurse nurse;
-	ShotCertificate shotCertificate;
 
 	public ShotCertificate getShotCertificate() {
-		return shotCertificate;
-	}
-
-	public void setShotCertificate(ShotCertificate shotCertificate) {
-		this.shotCertificate = shotCertificate;
+		return new ShotCertificate(0, date);
 	}
 
 	public Long getId() {
@@ -70,7 +97,4 @@ public class Shot {
 	public void setNurse(Nurse nurse) {
 		this.nurse = nurse;
 	}
-
-//	public Shot
-
 }

@@ -1,11 +1,23 @@
 package ar.edu.unlp.info.bd2.model;
 
-public class Vaccine {
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import org.hibernate.annotations.NaturalId;
+
+@Entity
+public class Vaccine implements Serializable {
 
 	public Vaccine() {
 	}
 
+    @NaturalId
 	String name;
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
 	Long id;
 
 	// retorna el nombre de la vacuna

@@ -1,19 +1,24 @@
 package ar.edu.unlp.info.bd2.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
+import javax.persistence.OneToMany;
+import javax.persistence.CascadeType;
+import org.hibernate.annotations.NaturalId;
 
-@Entity(name = "Patient")
-@Table(name = "patients")
-public class Patient {
+@Entity
+public class Patient implements Serializable {
 
 	public Patient() {
 	}
@@ -22,16 +27,19 @@ public class Patient {
     @GeneratedValue(strategy = GenerationType.AUTO)
 	Long id;
 	
+    @NaturalId
     String email;
+    
 	String fullname;
 	String password;
     
     @Temporal(TemporalType.TIMESTAMP)
 	Date dayOfBirth;
     
-	ArrayList<Shot> shots = new ArrayList<>();
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true)
+	List<Shot> shots = new ArrayList<>();
 
-	public ArrayList<Shot> getShots() {
+	public List<Shot> getShots() {
 		return shots;
 	}
 
@@ -64,7 +72,9 @@ public class Patient {
 	}
 
 	public Date getDayOfBirth() {
-		return dayOfBirth;
+        Calendar cal = Calendar.getInstance();
+		cal.setTime(dayOfBirth);
+        return cal.getTime();
 	}
 
 	public void setDayOfBirth(Date dayOfBirth) {

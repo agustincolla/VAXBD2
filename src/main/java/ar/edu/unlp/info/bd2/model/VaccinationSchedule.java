@@ -1,40 +1,47 @@
 package ar.edu.unlp.info.bd2.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Transient;
 
-public class VaccinationSchedule {
+@Entity
+public class VaccinationSchedule implements Serializable {
 
 	public VaccinationSchedule() {
+        this.vaccines = new ArrayList<>();
 	}
 
-	ArrayList<Vaccine> vaccines;
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	List<Vaccine> vaccines;
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
 	Long Id;
 
-	// getVaccines()
-	public ArrayList<Vaccine> getVaccines() {
+	public List<Vaccine> getVaccines() {
 		return vaccines;
 	}
 
-// setVaccine ()
-	public void setVaccines(ArrayList<Vaccine> vaccine) {
-		this.vaccines = vaccine;
+	public void setVaccines(List<Vaccine> vaccines) {
+		this.vaccines = vaccines;
 	}
 
-//getId()
 	public Long getId() {
 		return Id;
 	}
 
-// setId
 	public void setId(Long id) {
 		Id = id;
 	}
 
 	public void addVaccine(Vaccine va) {
 		this.getVaccines().add(va);
-	}
-
-	public VaccinationSchedule(ArrayList<Vaccine> vaxs) {
-		this.setVaccines(vaxs);
 	}
 }

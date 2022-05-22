@@ -1,15 +1,30 @@
 package ar.edu.unlp.info.bd2.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Transient;
+import javax.persistence.ManyToMany;
+import javax.persistence.CascadeType;
 
-public class Centre {
+@Entity
+public class Centre implements Serializable {
 
 	public Centre() {
 	}
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
 	Long id;
+    
 	String name;
-	ArrayList<Person> staff = new ArrayList<Person>();
+    
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	List<Person> staff = new ArrayList<>();
 
 	public Long getId() {
 		return id;
@@ -27,7 +42,7 @@ public class Centre {
 		this.name = name;
 	}
 
-	public ArrayList<Person> getStaffs() {
+	public List<Person> getStaffs() {
 		return staff;
 	}
 
@@ -36,9 +51,8 @@ public class Centre {
 	}
 
 	public void addStaff(Person p) {
-		if (p.addCentre(this)) {
-			this.getStaffs().add(p);
-		}
+		staff.add(p);
+        p.getCentres().add(this);
 	}
 
 	public Centre(String name) {

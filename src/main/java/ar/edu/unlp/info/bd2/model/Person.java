@@ -1,18 +1,35 @@
 package ar.edu.unlp.info.bd2.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.ManyToMany;
+import javax.persistence.Transient;
 
-public class Person {
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public class Person implements Serializable {
 
 	public Person() {
 	}
 
 	String dni;
 	String fullName;
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
 	Long id;
-	ArrayList<Centre> centres = new ArrayList<Centre>();
+    
+    @ManyToMany(mappedBy = "staff")
+	List<Centre> centres = new ArrayList<>();
 
-	public ArrayList<Centre> getCentres() {
+	public List<Centre> getCentres() {
 		return centres;
 	}
 
@@ -58,15 +75,5 @@ public class Person {
 	// modificar nombre de la persona
 	public void setFullName(String fullName) {
 		this.fullName = fullName;
-	}
-
-	public boolean addCentre(Centre c) {
-		boolean ok = true;
-		if (!centres.contains(c)) {
-			this.getCentres().add(c);
-		} else {
-			ok = false;
-		}
-		return ok;
 	}
 }
