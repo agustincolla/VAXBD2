@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OrderColumn;
 import javax.persistence.Transient;
 
 @Entity
@@ -18,7 +19,8 @@ public class VaccinationSchedule implements Serializable {
         this.vaccines = new ArrayList<>();
 	}
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany (cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @OrderColumn(name = "pos")
 	List<Vaccine> vaccines;
     
     @Id
