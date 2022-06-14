@@ -1,0 +1,281 @@
+// TP 3: SE DESCRIBEN AQUÍ COMANDOS Y QUERIES PARA EL DESARROLLO DEL MISMO
+
+// PARTE 2: Primeros pasos con MongoDB.
+
+// Inciso 5)
+
+//Cree una nueva base de datos llamada vaccination, y una colección llamada nurses. 
+//En esa colección inserte un nuevo documento (una enfermera) con los siguientes atributos:
+
+// {name:"Morella Crespo", experience:9} 
+
+
+// Crear DB
+use vaccination
+
+//Confirmamos que la base ha sido creada y que vaccination es la base sobre la que estamos trabajando:
+
+> db.dropDatabase()
+{ "ok" : 1 }
+
+> db
+vaccination
+>
+
+// Crear colección
+db.createCollection("nurses")
+{ "ok" : 1 }
+
+// Confirmamos que la colección ha sido creada
+> show collections
+nurses
+
+// insertar documento {name:"Morella Crespo", experience:9} 
+db.nurses.insertOne({
+	name:"Morella Crespo",
+	experience:9
+})
+
+// recuperar (todos) los documentos
+db.nurses.find().pretty()
+
+> db.nurses.insertOne ({name:"Morella Crespo", experience:9} )
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("62a6caba8d5e716dbf70fb9a")
+}
+> db.nurses.find({ name:"Morella Crespo", experience:9 }).pretty()
+{
+        "_id" : ObjectId("62a6caba8d5e716dbf70fb9a"),
+        "name" : "Morella Crespo",
+        "experience" : 9
+}
+>
+
+// Inciso 6)
+
+// insertar varios documentos
+db.products.insertMany([
+    {name:"Morella Crespo", experience:9},
+    {name:"Gale Molina", experience:8, vaccines: ["AZ", "Moderna"]},
+    {name:"Honoria Fernández", experience:5, vaccines: ["Pfizer", "Moderna", "Sputnik V"]},
+    {name:"Gonzalo Gallardo", experience:3},
+    {name:"Altea Parra", experience:6, vaccines: ["Pfizer"]}
+    ])
+
+// recuperar enfermeros de 5 años de experiencia o menos
+db.nurses.find({
+	experience: {
+		$lte: 5,
+	}
+}).pretty()
+
+// enfermeros que hayan aplicado la vacuna “Pfizer” 
+db.nurses.find({
+	vaccines: "Pfizer"
+}).pretty()
+
+// recuperar enfermeros que no hayan aplicado vacunas (es decir, que el atributo vaccines esté ausente)
+
+db.nurses.find({
+	vaccines: {
+		$exists: false,
+	}
+}).pretty()
+
+// recuperar enfermeros de apellido "Fernández"
+db.products.find({
+	"name": {
+		$regex: /Fernández/,
+	}
+}).pretty()
+
+// recuperar enfermeros con 6 o más años de experiencia y que hayan aplicado la vacuna "Moderna" 
+db.products.find( { $and: [
+    {
+	experience: { $sgt: 6}
+    },
+	{
+    vaccine: "Moderna"
+	}]
+}).pretty()
+
+// misma que anterior pero solo proyecta el nombre
+db.products.find( { $and: [
+    {
+	experience: { $sgt: 6}
+    },
+	{
+    vaccine: "Moderna"
+	}]
+},
+{
+	name: true,
+	_id: false,
+})
+
+// Inciso 7)
+
+//  Actualice a "Gale Molina" cambiándole la experiencia a 9 años. 
+db.nurses.updateOne({
+	name: "Gale Molina"
+},
+{
+	$set: {
+		experience: 9,
+	}
+})
+
+// Inciso 8
+// Cree el array de vacunas (vaccines) para ”Gonzalo Gallardo"
+
+db.nurses.updateOne({
+	name: "Gonzalo Gallardo"
+},
+{
+	$set: {
+		vaccines: [],
+	}
+})
+
+// Inciso 9
+// Agregue “AZ” a las vacunas de “Altea Parra”.
+db.products.updateOne({
+	name: "Altea Parra"
+},
+{
+	$push: {
+		vaccines: "AZ",
+	}
+})
+
+//Inciso 10
+// Duplique la experiencia de todos los enfermeros que hayan aplicado la vacuna “Pfizer”
+
+db.nurses.updateMany({
+	vaccines: "Pfizer",
+},
+{
+	$mul: {
+		experience: 2,
+	}
+})
+
+
+// PARTE 3: Índices.
+
+//Elimine a todos los enfermeros de la colección
+db.nurses.remove({})
+
+// Inciso 11)
+// Busque en la colección de dosis (doses) si existe algún índice definido.
+db.doses.getIndexes()
+
+// Inciso 12) 
+//las dosis que tengan en el  nombre del enfermero el string “11”
+
+//Inciso 12.a) (Consulta sin índice)
+
+db.doses.find({nurse:/11/}).explain("executionStats")
+
+// Inciso 12.b) (Consulta con índice) 
+// Se crea el índice y se vuelve a realizar la consulta para comparar performance
+
+db.doses.createIndex({nurse: 1})
+db.doses.find({nurse:/11/}).explain("executionStats")
+
+// Inciso 13)
+// definir  una variable en la terminal y asignarle como valor el polígono del archivo provisto por la cátedra caba.geojson 
+
+var cc = {
+	"type":"MultiPolygon",
+	"coordinates":[[[
+	  [-58.46305847167969,-34.53456089748654],
+	  [-58.49979400634765,-34.54983198845187],
+	  [-58.532066345214844,-34.614561581608186],
+	  [-58.528633117675774,-34.6538270014492],
+	  [-58.48674774169922,-34.68742794931483],
+	  [-58.479881286621094,-34.68206400648744],
+	  [-58.46855163574218,-34.65297974261105],
+	  [-58.465118408203125,-34.64733112904415],
+	  [-58.4585952758789,-34.63998735602951],
+	  [-58.45344543457032,-34.63603274732642],
+	  [-58.447265625,-34.63575026806082],
+	  [-58.438339233398445,-34.63038297923296],
+	  [-58.38100433349609,-34.62162507826766],
+	  [-58.38237762451171,-34.59251960889388],
+	  [-58.378944396972656,-34.5843230246475],
+	  [-58.46305847167969,-34.53456089748654]
+	]]]
+   }
+
+
+// Inciso 13
+// a) Consulta sin índice (querie de consulta)
+db.patients.find({address: {$geoWithin: {$geometry: cc}}}).explain("executionStats")
+// b) Creamos un índice geoespacial de tipo  2dsphere para el campo address de la colección patients
+db.patients.createIndex({address: "2dsphere"})
+// c) Consulta luego de crear el índice (querie de consulta)
+db.patients.find({address: {$geoWithin: {$geometry: cc}}}).explain("executionStats")
+
+//PARTE 4: Aggregation Framework
+
+//Inciso 14 Obtener 5 pacientes aleatorios de la colección. 
+db.patients.aggregate([{$sample: {size: 5}}])
+
+//Inciso 15 pacientes que vivan a 1 km (o menos) del  centro geográfico de la ciudad de Buenos Aires
+db.patients.aggregate([
+    {
+        $geoNear: {
+            near: { type: "Point", coordinates: [-58.4586,-34.5968] },
+            distanceField: "dist.distance",
+            maxDistance: 1000,
+            spherical: true
+        }
+    },
+    { $out: "patients_caba" }
+])
+
+//Inciso 16 Obtener una colección de las dosis aplicadas a los pacientes del Inciso 15 - Opción 1
+db.doses.aggregate([
+    {
+        $lookup: {
+            from: "patients_caba",
+            localField: "patient",
+            foreignField: "name",
+            as: "patient_doc"
+        }
+    },
+    { $match: { patient_doc: {$not: {$size: 0}} } },
+    { $project: { patient_doc: 0 } },
+	{ $out: "applied_doses" }
+])
+
+//Inciso 16 Obtener una colección de las dosis aplicadas a los pacientes del Inciso 15 - Opción 2
+db.patients_caba.aggregate([
+	{$project: {_id: 0, patient: 1}},
+	{$out: "dosis_aplicadas"}])
+
+//Inciso 17 nueva colección de nurses, cuyos nombres incluyan el string “111”, agregando dosis que aplicó dsp del 1/5/2021
+db.nurses.aggregate([
+    { $match: { name: /111/ } },
+    {
+        $lookup: {
+            from: "doses",
+            localField: "name",
+            foreignField: "nurse",
+            as: "doses"
+        }
+    },
+    {
+        $project: {
+            doses: {
+                $filter: {
+                    input: "$doses",
+                    as: "dose",
+                    cond: { $gt: [ "$$dose.date", new Date(2021-05-01) ] }
+                }
+            }
+        }
+    }
+])
