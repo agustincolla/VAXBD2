@@ -79,4 +79,14 @@ public class Staff implements Serializable {
 	public void setFullName(String fullName) {
 		this.fullName = fullName;
 	}
+	public boolean addCentre(Centre c) {
+		boolean ok=true;
+		if(!this.getCentres().contains(c)){
+			this.getCentres().add(c);
+		}
+		else {
+			ok=false;
+		}
+		return ok;
+	}
 }

@@ -53,8 +53,9 @@ public class Centre implements Serializable {
 	}
 
 	public void addStaff(Staff p) {
-		staff.add(p);
-        p.getCentres().add(this);
+		if(p.addCentre(this)) {
+			this.getStaffs().add(p);	
+		}	
 	}
 
 	public Centre(String name) {

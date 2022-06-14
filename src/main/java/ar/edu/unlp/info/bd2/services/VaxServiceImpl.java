@@ -10,13 +10,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.springframework.transaction.annotation.Transactional;
+
 public class VaxServiceImpl implements VaxService {
     private VaxRepository repository;
     
     public VaxServiceImpl(VaxRepository repo) {
     	setRepository(repo);
     }
-	//@Transactional
+	@Transactional
 	public Patient createPatient(String email, String fullname, String password, Date dayOfBirth) throws VaxException {
         Patient patient = new Patient(email, fullname, password, dayOfBirth);
         repository.save(patient);
@@ -24,6 +26,7 @@ public class VaxServiceImpl implements VaxService {
 	}
 
 	@Override
+	@Transactional
 	public Vaccine createVaccine(String name) throws VaxException {
 		Vaccine vaccine = new Vaccine(name);
         repository.save(vaccine);
@@ -31,6 +34,7 @@ public class VaxServiceImpl implements VaxService {
 	}
 
 	@Override
+	@Transactional
 	public Shot createShot(Patient patient, Vaccine vaccine, Date date, Centre centre, Nurse nurse) throws VaxException {
 		Shot shot = new Shot(patient, vaccine, date, centre, nurse);
         repository.save(shot);
@@ -49,6 +53,7 @@ public class VaxServiceImpl implements VaxService {
 	}
 
 	@Override
+	@Transactional
 	public Centre createCentre(String name) throws VaxException {
 		Centre centre = new Centre(name);
         repository.save(centre);
@@ -56,6 +61,7 @@ public class VaxServiceImpl implements VaxService {
 	}
 
 	@Override
+	@Transactional
 	public Nurse createNurse(String dni, String fullName, Integer experience) throws VaxException {
 		Nurse nurse = new Nurse(dni, fullName, experience);
         repository.save(nurse);
@@ -63,6 +69,7 @@ public class VaxServiceImpl implements VaxService {
 	}
 
 	@Override
+	@Transactional
 	public SupportStaff createSupportStaff(String dni, String fullName, String area) throws VaxException {
 		SupportStaff supportStaff = new SupportStaff(dni, fullName, area);
         repository.save(supportStaff);
@@ -70,6 +77,7 @@ public class VaxServiceImpl implements VaxService {
 	}
 
 	@Override
+	@Transactional
 	public VaccinationSchedule createVaccinationSchedule() throws VaxException {
 		VaccinationSchedule vaccinationSchedule = new VaccinationSchedule();
         repository.save(vaccinationSchedule);
@@ -87,12 +95,14 @@ public class VaxServiceImpl implements VaxService {
 	}
 
 	@Override
+	@Transactional
 	public SupportStaff updateSupportStaff(SupportStaff staff) throws VaxException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
+	@Transactional
 	public Centre updateCentre(Centre centre) {
 		return repository.updateCentre(centre);
 	}
@@ -155,6 +165,7 @@ public class VaxServiceImpl implements VaxService {
     }
 
     @Override
+    @Transactional
     public VaccinationSchedule updateVaccinationSchedule(VaccinationSchedule vaccinationSchedule) throws VaxException {
         return repository.updateVaccinationSchedule(vaccinationSchedule);
     }
