@@ -2,8 +2,8 @@ package ar.edu.unlp.info.bd2.config;
 
 
 import ar.edu.unlp.info.bd2.services.VaxService;
-import ar.edu.unlp.info.bd2.services.SpringDataVaxService;
 import ar.edu.unlp.info.bd2.utils.DBInitializer;
+import ar.edu.unlp.info.bd2.services.SpringDataVaxService;
 
 import java.util.Properties;
 import javax.persistence.EntityManagerFactory;
@@ -40,8 +40,8 @@ public class SpringDataConfiguration {
         BasicDataSource dataSource = new BasicDataSource();
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
         dataSource.setUrl("jdbc:mysql://localhost:3306/grupo" + this.getGroupNumber()+"?useSSL=false");
-        dataSource.setUsername("grupo2022");
-        dataSource.setPassword("pa$$word");
+        dataSource.setUsername("grupo26");
+        dataSource.setPassword("pa$$word26");
 
         return dataSource;
     }
@@ -82,6 +82,6 @@ public class SpringDataConfiguration {
     }
 
     private Integer getGroupNumber() {
-        return null;
+        return 26;
     }
 }
