@@ -6,4 +6,6 @@ import ar.edu.unlp.info.bd2.model.VaccinationSchedule;
 
 public interface VaccinationSchedulerRepository extends CrudRepository<VaccinationSchedule, Long>{
 
+	public VaccinationSchedule getVaccinationScheduleById(Long Id);
+	public VaccinationSchedule updateVaccinationSchedule(VaccinationSchedule vaccinationSchedule);
 }
