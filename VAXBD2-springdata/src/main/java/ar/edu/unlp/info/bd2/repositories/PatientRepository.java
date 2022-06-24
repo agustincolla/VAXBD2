@@ -10,6 +10,7 @@ import ar.edu.unlp.info.bd2.model.Patient;
 
 public interface PatientRepository extends CrudRepository<Patient, Long>{
 
+	public Patient save(Patient patient);
 	public Optional<Patient> getPatientByEmail(String email);
 	@Query("select p from Patient p")
 	public List<Patient> getAllPatients();

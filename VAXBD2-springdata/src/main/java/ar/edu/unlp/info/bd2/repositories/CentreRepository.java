@@ -9,7 +9,8 @@ import org.springframework.data.repository.CrudRepository;
 import ar.edu.unlp.info.bd2.model.Centre;
 
 public interface CentreRepository extends CrudRepository<Centre, Long> {
-
+    
+	public Centre save(Centre centre);
 	public Centre updateCentre(Centre centre);
 	public Optional<Centre> getCentreByName(String name);
 	@Query("select c"+

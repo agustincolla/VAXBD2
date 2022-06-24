@@ -10,6 +10,7 @@ import org.springframework.data.repository.query.Param;
 import ar.edu.unlp.info.bd2.model.Shot;
 
 public interface ShotRepository extends CrudRepository<Shot, Long>{
+	public Shot save(Shot shot);
 	@Query("select s"
             + " from Shot s"
             + " where s.date between :startDate and :endDate")

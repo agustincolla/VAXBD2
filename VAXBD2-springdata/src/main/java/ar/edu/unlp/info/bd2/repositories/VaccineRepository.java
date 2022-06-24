@@ -9,7 +9,8 @@ import org.springframework.data.repository.CrudRepository;
 import ar.edu.unlp.info.bd2.model.Vaccine;
 
 public interface VaccineRepository extends CrudRepository<Vaccine, Long>{
-
+    
+	public Vaccine save(Vaccine vaccine);
 	public Optional<Vaccine> getVaccineByName(String name);
 	@Query("select v"
             + " from Vaccine v"
