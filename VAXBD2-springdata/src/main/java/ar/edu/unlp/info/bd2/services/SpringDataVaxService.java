@@ -14,6 +14,7 @@ import ar.edu.unlp.info.bd2.model.SupportStaff;
 import ar.edu.unlp.info.bd2.model.VaccinationSchedule;
 import ar.edu.unlp.info.bd2.model.Vaccine;
 import ar.edu.unlp.info.bd2.repositories.VaxException;
+import ar.edu.unlp.info.bd2.repositories.*;
 
 public class SpringDataVaxService implements VaxService{
 
