@@ -13,6 +13,7 @@ import ar.edu.unlp.info.bd2.model.SupportStaff;
 
 public interface StaffRepository extends CrudRepository<Staff, Long>{
     public Staff save(Staff staff);
+    public Staff updateSupportStaff(SupportStaff staff);
 	public Optional<SupportStaff> getSupportStaffByDni(String dni);
 	@Query("select n"
             + " from Nurse n"
