@@ -4,6 +4,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import ar.edu.unlp.info.bd2.model.ShotCertificate;
 
-public interface ShotCertificateRopository extends CrudRepository<ShotCertificate, Long>{
+public interface ShotCertificateRepository extends CrudRepository<ShotCertificate, Long>{
   public ShotCertificate save(ShotCertificate shotCertificate);
 }

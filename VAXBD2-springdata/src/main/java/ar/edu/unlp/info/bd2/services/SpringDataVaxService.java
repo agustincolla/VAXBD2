@@ -4,6 +4,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+
 import ar.edu.unlp.info.bd2.model.Centre;
 import ar.edu.unlp.info.bd2.model.Nurse;
 import ar.edu.unlp.info.bd2.model.Patient;
@@ -17,11 +21,24 @@ import ar.edu.unlp.info.bd2.repositories.VaxException;
 import ar.edu.unlp.info.bd2.repositories.*;
 
 public class SpringDataVaxService implements VaxService{
-
+    @Autowired
+    PatientRepository pr;
+    @Autowired
+    CentreRepository cr;
+    @Autowired
+    StaffRepository sr;
+    @Autowired
+    ShotCertificateRepository shcr;
+    @Autowired
+    ShotRepository shr;
+    @Autowired
+    VaccinationSchedulerRepository vsr;
+    @Autowired
+    VaccineRepository vr;
 	@Override
 	public List<Patient> getAllPatients() {
 		// TODO Auto-generated method stub
-		return null;
+		return pr.getAllPatients();
 	}
 
 	@Override
@@ -33,7 +50,8 @@ public class SpringDataVaxService implements VaxService{
 	@Override
 	public List<Centre> getCentresTopNStaff(int n) {
 		// TODO Auto-generated method stub
-		return null;
+		Pageable page= PageRequest.of(0, n);
+		return cr.getCentresTopNStaff(page);
 	}
 
 	@Override
