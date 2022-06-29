@@ -24,7 +24,7 @@ public interface StaffRepository extends CrudRepository<Staff, Long>{
             + " from SupportStaff ss"
             + " group by ss.area"
             + " order by count(ss.area) asc")
-	public String getLessEmployeesSupportStaffArea(Pageable page);
+	public List<String> getLessEmployeesSupportStaffArea(Pageable page);
 	@Query("select s"
             + " from Staff s"
             + " where s.fullName like :name")

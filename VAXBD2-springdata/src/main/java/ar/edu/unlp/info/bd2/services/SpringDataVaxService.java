@@ -60,7 +60,7 @@ public class SpringDataVaxService implements VaxService{
 	public Centre getTopShotCentre() {
 		// TODO Auto-generated method stub
 		Pageable page= PageRequest.of(0, 1);
-		return cr.getTopShotCentre(page);
+		return cr.getTopShotCentre(page).get(0);
 	}
 
 	@Override
@@ -73,7 +73,7 @@ public class SpringDataVaxService implements VaxService{
 	public String getLessEmployeesSupportStaffArea() {
 		// TODO Auto-generated method stub
 		Pageable page= PageRequest.of(0, 1);
-		return sr.getLessEmployeesSupportStaffArea(page);
+		return sr.getLessEmployeesSupportStaffArea(page).get(0);
 	}
 
 	@Override
