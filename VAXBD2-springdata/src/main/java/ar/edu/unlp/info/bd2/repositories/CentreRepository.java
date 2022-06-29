@@ -22,6 +22,6 @@ public interface CentreRepository extends CrudRepository<Centre, Long> {
             + " from Shot s"
             + " group by s.centre"
             + " order by count(s) desc")
-	public Centre getTopShotCentre();
+	public Centre getTopShotCentre(Pageable page);
 	
 }
