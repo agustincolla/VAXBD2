@@ -14,7 +14,7 @@ import ar.edu.unlp.info.bd2.model.SupportStaff;
 
 public interface StaffRepository extends CrudRepository<Staff, Long>{
     public Staff save(Staff staff);
-    public Staff updateSupportStaff(SupportStaff staff);
+    //public Staff updateSupportStaff(SupportStaff staff);
 	public Optional<SupportStaff> getSupportStaffByDni(String dni);
 	@Query("select n"
             + " from Nurse n"
@@ -27,7 +27,7 @@ public interface StaffRepository extends CrudRepository<Staff, Long>{
 	public List<String> getLessEmployeesSupportStaffArea(Pageable page);
 	@Query("select s"
             + " from Staff s"
-            + " where s.fullName like :name")
+            + " where s.fullName like %:name%")
 	public List<Staff> getStaffWithName(@Param("name")String name);
 	@Query("select n"
             + " from Nurse n"

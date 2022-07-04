@@ -25,7 +25,7 @@ public class VaccinationSchedule implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-	Long Id;
+	Long id;
 
 	public List<Vaccine> getVaccines() {
 		return vaccines;
@@ -36,11 +36,11 @@ public class VaccinationSchedule implements Serializable {
 	}
 
 	public Long getId() {
-		return Id;
+		return id;
 	}
 
 	public void setId(Long id) {
-		Id = id;
+		this.id = id;
 	}
 
 	public void addVaccine(Vaccine va) {

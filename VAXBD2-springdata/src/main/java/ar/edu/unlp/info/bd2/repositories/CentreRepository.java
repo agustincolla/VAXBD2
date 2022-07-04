@@ -12,11 +12,11 @@ import ar.edu.unlp.info.bd2.model.Centre;
 public interface CentreRepository extends CrudRepository<Centre, Long> {
     
 	public Centre save(Centre centre);
-	public Centre updateCentre(Centre centre);
+	//public Centre updateCentre(Centre centre);
 	public Optional<Centre> getCentreByName(String name);
-	@Query("select c"+
-           "from Centre c"+
-           "order by size(c.staff) desc")
+	@Query("select c"
+            + " from Centre c"
+            + " order by size(c.staff) desc")
 	public List<Centre> getCentresTopNStaff(Pageable page);
 	@Query("select s.centre"
             + " from Shot s"

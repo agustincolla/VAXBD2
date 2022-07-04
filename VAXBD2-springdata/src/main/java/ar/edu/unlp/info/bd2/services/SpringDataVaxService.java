@@ -21,6 +21,7 @@ import ar.edu.unlp.info.bd2.model.VaccinationSchedule;
 import ar.edu.unlp.info.bd2.model.Vaccine;
 import ar.edu.unlp.info.bd2.repositories.VaxException;
 import ar.edu.unlp.info.bd2.repositories.*;
+import org.springframework.dao.DataIntegrityViolationException;
 
 public class SpringDataVaxService implements VaxService{
     @Autowired
@@ -29,8 +30,8 @@ public class SpringDataVaxService implements VaxService{
     CentreRepository cr;
     @Autowired
     StaffRepository sr;
-    @Autowired
-    ShotCertificateRepository shcr;
+    //@Autowired
+    //ShotCertificateRepository shcr;
     @Autowired
     ShotRepository shr;
     @Autowired
@@ -99,7 +100,11 @@ public class SpringDataVaxService implements VaxService{
 	public Patient createPatient(String email, String fullname, String password, Date dayOfBirth) throws VaxException {
 		// TODO Auto-generated method stub
 		Patient p= new Patient(email,fullname,password,dayOfBirth);
-		pr.save(p);
+        try {
+            pr.saveAndFlush(p);
+        } catch (DataIntegrityViolationException e) {
+            throw new VaxException("Constraint Violation");
+        }
 		return p;
 	}
 
@@ -107,7 +112,11 @@ public class SpringDataVaxService implements VaxService{
 	public Vaccine createVaccine(String name) throws VaxException {
 		// TODO Auto-generated method stub
 		Vaccine v=new Vaccine(name);
-		vr.save(v);
+        try {
+            vr.saveAndFlush(v);
+        } catch (DataIntegrityViolationException e) {
+            throw new VaxException("Constraint Violation");
+        }
 		return v;
 	}
 
@@ -180,13 +189,13 @@ public class SpringDataVaxService implements VaxService{
 	@Override
 	public SupportStaff updateSupportStaff(SupportStaff staff) throws VaxException {
 		// TODO Auto-generated method stub
-		return (SupportStaff) sr.updateSupportStaff(staff);
+		return (SupportStaff) sr.save(staff);
 	}
 
 	@Override
 	public Centre updateCentre(Centre centre) {
 		// TODO Auto-generated method stub
-		return cr.updateCentre(centre);
+		return cr.save(centre);
 	}
 
 	@Override
@@ -198,7 +207,7 @@ public class SpringDataVaxService implements VaxService{
 	@Override
 	public VaccinationSchedule updateVaccinationSchedule(VaccinationSchedule schedule) {
 		// TODO Auto-generated method stub
-		return vsr.updateVaccinationSchedule(schedule);
+		return vsr.save(schedule);
 	}
 
 }

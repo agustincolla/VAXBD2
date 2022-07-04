@@ -7,8 +7,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import ar.edu.unlp.info.bd2.model.Vaccine;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface VaccineRepository extends CrudRepository<Vaccine, Long>{
+public interface VaccineRepository extends JpaRepository<Vaccine, Long>{
     
 	public Vaccine save(Vaccine vaccine);
 	public Optional<Vaccine> getVaccineByName(String name);
