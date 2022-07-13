@@ -9,11 +9,15 @@ import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Column;
-import javax.persistence.Transient;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Shot implements Serializable {
+
+    public ShotCertificate getShotCertificate() {
+        return shotCertificate;
+    }
 
     public Shot(Patient patient, Vaccine vaccine, Date date, Centre centre, Nurse nurse) {
         this.patient = patient;
@@ -21,6 +25,7 @@ public class Shot implements Serializable {
         this.date = date;
         this.centre = centre;
         this.nurse = nurse;
+        this.shotCertificate = new ShotCertificate(this.date);
     }
 
 	public Shot() {
@@ -45,10 +50,9 @@ public class Shot implements Serializable {
     
     @ManyToOne
 	Nurse nurse;
-
-	public ShotCertificate getShotCertificate() {
-		return new ShotCertificate(0, date);
-	}
+    
+    @OneToOne
+    ShotCertificate shotCertificate;
 
 	public Long getId() {
 		return id;

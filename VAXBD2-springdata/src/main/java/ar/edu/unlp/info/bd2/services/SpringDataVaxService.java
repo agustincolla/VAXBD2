@@ -22,6 +22,7 @@ import ar.edu.unlp.info.bd2.model.Vaccine;
 import ar.edu.unlp.info.bd2.repositories.VaxException;
 import ar.edu.unlp.info.bd2.repositories.*;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.transaction.annotation.Transactional;
 
 public class SpringDataVaxService implements VaxService{
     @Autowired
@@ -30,27 +31,35 @@ public class SpringDataVaxService implements VaxService{
     CentreRepository cr;
     @Autowired
     StaffRepository sr;
-    //@Autowired
-    //ShotCertificateRepository shcr;
+    @Autowired
+    SupportStaffRepository ssr;
+    @Autowired
+    NurseRepository nr;
+    @Autowired
+    ShotCertificateRepository shcr;
     @Autowired
     ShotRepository shr;
     @Autowired
     VaccinationSchedulerRepository vsr;
     @Autowired
     VaccineRepository vr;
+    
 	@Override
+    @Transactional
 	public List<Patient> getAllPatients() {
 		// TODO Auto-generated method stub
 		return pr.getAllPatients();
 	}
 
 	@Override
+    @Transactional
 	public List<Nurse> getNurseWithMoreThanNYearsExperience(int years) {
 		// TODO Auto-generated method stub
-		return sr.getNurseWithMoreThanNYearsExperience(years);
+		return nr.getNurseWithMoreThanNYearsExperience(years);
 	}
 
 	@Override
+    @Transactional
 	public List<Centre> getCentresTopNStaff(int n) {
 		// TODO Auto-generated method stub
 		Pageable page= PageRequest.of(0, n);
@@ -58,6 +67,7 @@ public class SpringDataVaxService implements VaxService{
 	}
 
 	@Override
+    @Transactional
 	public Centre getTopShotCentre() {
 		// TODO Auto-generated method stub
 		Pageable page= PageRequest.of(0, 1);
@@ -65,31 +75,36 @@ public class SpringDataVaxService implements VaxService{
 	}
 
 	@Override
+    @Transactional
 	public List<Nurse> getNurseNotShot() {
 		// TODO Auto-generated method stub
-		return sr.getNurseNotShot();
+		return nr.getNurseNotShot();
 	}
 
 	@Override
+    @Transactional
 	public String getLessEmployeesSupportStaffArea() {
 		// TODO Auto-generated method stub
 		Pageable page= PageRequest.of(0, 1);
-		return sr.getLessEmployeesSupportStaffArea(page).get(0);
+		return ssr.getLessEmployeesSupportStaffArea(page).get(0);
 	}
 
 	@Override
+    @Transactional
 	public List<Staff> getStaffWithName(String name) {
 		// TODO Auto-generated method stub
 		return sr.getStaffWithName(name);
 	}
 
 	@Override
+    @Transactional
 	public List<Vaccine> getUnappliedVaccines() {
 		// TODO Auto-generated method stub
 		return vr.getUnappliedVaccines();
 	}
 
 	@Override
+    @Transactional
 	public List<ShotCertificate> getShotCertificatesBetweenDates(Date startDate, Date endDate) {
 		// TODO Auto-generated method stub
 		Stream<Shot> shots = shr.getShotsBetweenDates(startDate, endDate);
@@ -97,6 +112,7 @@ public class SpringDataVaxService implements VaxService{
 	}
 
 	@Override
+    @Transactional
 	public Patient createPatient(String email, String fullname, String password, Date dayOfBirth) throws VaxException {
 		// TODO Auto-generated method stub
 		Patient p= new Patient(email,fullname,password,dayOfBirth);
@@ -109,6 +125,7 @@ public class SpringDataVaxService implements VaxService{
 	}
 
 	@Override
+    @Transactional
 	public Vaccine createVaccine(String name) throws VaxException {
 		// TODO Auto-generated method stub
 		Vaccine v=new Vaccine(name);
@@ -121,6 +138,7 @@ public class SpringDataVaxService implements VaxService{
 	}
 
 	@Override
+    @Transactional
 	public Shot createShot(Patient patient, Vaccine vaccine, Date date, Centre centre, Nurse nurse)
 			throws VaxException {
 		// TODO Auto-generated method stub
@@ -131,18 +149,21 @@ public class SpringDataVaxService implements VaxService{
 	}
 
 	@Override
+    @Transactional
 	public Optional<Patient> getPatientByEmail(String email) {
 		// TODO Auto-generated method stub
 		return pr.getPatientByEmail(email);
 	}
 
 	@Override
+    @Transactional
 	public Optional<Vaccine> getVaccineByName(String name) {
 		// TODO Auto-generated method stub
 		return vr.getVaccineByName(name);
 	}
 
 	@Override
+    @Transactional
 	public Centre createCentre(String name) throws VaxException {
 		// TODO Auto-generated method stub
 		Centre c=new Centre(name);
@@ -151,6 +172,7 @@ public class SpringDataVaxService implements VaxService{
 	}
 
 	@Override
+    @Transactional
 	public Nurse createNurse(String dni, String fullName, Integer experience) throws VaxException {
 		// TODO Auto-generated method stub
 		Nurse n=new Nurse(dni,fullName,experience);
@@ -159,6 +181,7 @@ public class SpringDataVaxService implements VaxService{
 	}
 
 	@Override
+    @Transactional
 	public SupportStaff createSupportStaff(String dni, String fullName, String area) throws VaxException {
 		// TODO Auto-generated method stub
 		SupportStaff ss=new SupportStaff(dni,fullName,area);
@@ -167,6 +190,7 @@ public class SpringDataVaxService implements VaxService{
 	}
 
 	@Override
+    @Transactional
 	public VaccinationSchedule createVaccinationSchedule() throws VaxException {
 		// TODO Auto-generated method stub
 		VaccinationSchedule vs=new VaccinationSchedule();
@@ -175,36 +199,42 @@ public class SpringDataVaxService implements VaxService{
 	}
 
 	@Override
+    @Transactional
 	public VaccinationSchedule getVaccinationScheduleById(Long id) throws VaxException {
 		// TODO Auto-generated method stub
 		return vsr.getVaccinationScheduleById(id);
 	}
 
 	@Override
+    @Transactional
 	public Optional<Centre> getCentreByName(String name) throws VaxException {
 		// TODO Auto-generated method stub
 		return cr.getCentreByName(name);
 	}
 
 	@Override
+    @Transactional
 	public SupportStaff updateSupportStaff(SupportStaff staff) throws VaxException {
 		// TODO Auto-generated method stub
 		return (SupportStaff) sr.save(staff);
 	}
 
 	@Override
+    @Transactional
 	public Centre updateCentre(Centre centre) {
 		// TODO Auto-generated method stub
 		return cr.save(centre);
 	}
 
 	@Override
+    @Transactional
 	public Optional<SupportStaff> getSupportStaffByDni(String dni) {
 		// TODO Auto-generated method stub
-		return sr.getSupportStaffByDni(dni);
+		return ssr.getSupportStaffByDni(dni);
 	}
 
 	@Override
+    @Transactional
 	public VaccinationSchedule updateVaccinationSchedule(VaccinationSchedule schedule) {
 		// TODO Auto-generated method stub
 		return vsr.save(schedule);
