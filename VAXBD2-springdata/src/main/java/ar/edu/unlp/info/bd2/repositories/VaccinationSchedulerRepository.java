@@ -8,5 +8,4 @@ public interface VaccinationSchedulerRepository extends CrudRepository<Vaccinati
     
 	public VaccinationSchedule save(VaccinationSchedule vaccinationSchedule);
 	public VaccinationSchedule getVaccinationScheduleById(Long Id);
-	//public VaccinationSchedule updateVaccinationSchedule(VaccinationSchedule vaccinationSchedule);
 }
