@@ -143,6 +143,7 @@ public class SpringDataVaxService implements VaxService{
 			throws VaxException {
 		// TODO Auto-generated method stub
 		Shot s=new Shot(patient,vaccine,date,centre,nurse);
+        shcr.save(s.getShotCertificate());
 		shr.save(s);
 		patient.getShots().add(s);
 		return s;
