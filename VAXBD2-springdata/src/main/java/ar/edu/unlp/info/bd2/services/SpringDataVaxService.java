@@ -45,58 +45,49 @@ public class SpringDataVaxService implements VaxService{
     VaccineRepository vr;
     
 	@Override
-    @Transactional
 	public List<Patient> getAllPatients() {
 		return pr.getAllPatients();
 	}
 
 	@Override
-    @Transactional
 	public List<Nurse> getNurseWithMoreThanNYearsExperience(int years) {
 		return nr.getNurseWithMoreThanNYearsExperience(years);
 	}
 
 	@Override
-    @Transactional
 	public List<Centre> getCentresTopNStaff(int n) {
 		Pageable page= PageRequest.of(0, n);
 		return cr.getCentresTopNStaff(page);
 	}
 
 	@Override
-    @Transactional
 	public Centre getTopShotCentre() {
 		Pageable page= PageRequest.of(0, 1);
 		return cr.getTopShotCentre(page).get(0);
 	}
 
 	@Override
-    @Transactional
 	public List<Nurse> getNurseNotShot() {
 		return nr.getNurseNotShot();
 	}
 
 	@Override
-    @Transactional
 	public String getLessEmployeesSupportStaffArea() {
 		Pageable page= PageRequest.of(0, 1);
 		return ssr.getLessEmployeesSupportStaffArea(page).get(0);
 	}
 
 	@Override
-    @Transactional
 	public List<Staff> getStaffWithName(String name) {
 		return sr.getStaffWithName(name);
 	}
 
 	@Override
-    @Transactional
 	public List<Vaccine> getUnappliedVaccines() {
 		return vr.getUnappliedVaccines();
 	}
 
 	@Override
-    @Transactional
 	public List<ShotCertificate> getShotCertificatesBetweenDates(Date startDate, Date endDate) {
 		Stream<Shot> shots = shr.getShotsBetweenDates(startDate, endDate);
         return shots.map(s -> s.getShotCertificate()).collect(Collectors.toList());
@@ -138,13 +129,11 @@ public class SpringDataVaxService implements VaxService{
 	}
 
 	@Override
-    @Transactional
 	public Optional<Patient> getPatientByEmail(String email) {
 		return pr.getPatientByEmail(email);
 	}
 
 	@Override
-    @Transactional
 	public Optional<Vaccine> getVaccineByName(String name) {
 		return vr.getVaccineByName(name);
 	}
@@ -182,13 +171,11 @@ public class SpringDataVaxService implements VaxService{
 	}
 
 	@Override
-    @Transactional
 	public VaccinationSchedule getVaccinationScheduleById(Long id) throws VaxException {
 		return vsr.getVaccinationScheduleById(id);
 	}
 
 	@Override
-    @Transactional
 	public Optional<Centre> getCentreByName(String name) throws VaxException {
 		return cr.getCentreByName(name);
 	}
@@ -206,7 +193,6 @@ public class SpringDataVaxService implements VaxService{
 	}
 
 	@Override
-    @Transactional
 	public Optional<SupportStaff> getSupportStaffByDni(String dni) {
 		return ssr.getSupportStaffByDni(dni);
 	}
